@@ -24,6 +24,18 @@ export class SpotifyService {
     );
   }
 
+  getArtist(termino: string) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authorizationToken}`
+    });
+    return this.http.get(
+      `https://api.spotify.com/v1/search?q=${termino}&type=artist&limit=15`,
+      {
+        headers
+      }
+    );
+  }
+
   getNewToken() {
     // const headers = new HttpHeaders({
     //   grant_type: "client_credentials",
@@ -37,6 +49,6 @@ export class SpotifyService {
     //     console.log(data);
     //   });
     this.authorizationToken =
-      "BQAlPIim6ziEdnR8mXvEME5QW3vannQQZVomPBonZT-KgFo5yuf-vxEmpbTP-agpO8l_Yd2Lw3iBsFey8J4";
+      "BQBBjRBP4Yx3XQLdG6auuurlwzskOYntlyZ6RyV9qK1OS43I5KEnBpG_KkMlWu9y5c_GpETqFHJs1jp0YvE";
   }
 }
