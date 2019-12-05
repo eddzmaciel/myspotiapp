@@ -11,9 +11,10 @@ import { SearchComponent } from "./components/search/search.component";
 import { ArtistComponent } from "./components/artist/artist.component";
 import { NavbarComponent } from "./components/shared/navbar/navbar.component";
 
-//Importar rutas
+//import routes
 import { ROUTES } from "./app.routes";
 import { CountriesComponent } from "./components/countries/countries.component";
+import { NoimagePipe } from "./pipes/noimage.pipe";
 
 //importing services
 //import { SpotifyService } from "./services/spotify.service";
@@ -25,7 +26,8 @@ import { CountriesComponent } from "./components/countries/countries.component";
     SearchComponent,
     ArtistComponent,
     NavbarComponent,
-    CountriesComponent
+    CountriesComponent,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,
