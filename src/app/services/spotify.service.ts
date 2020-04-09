@@ -49,6 +49,6 @@ export class SpotifyService {
     //     console.log(data);
     //   });
     this.authorizationToken =
-      "BQBzZ4i7Neoiy31qk6JQR9YfbPAXpwbuT5Z4I3Nsrl72HN1kI1gH2xYxFvAE1Qu7EXYU30VDpaYoOM_xB9g";
+      "BQBDGzOb180yu9KaTxZGCQ5B_6QaewQkcJTiSdMmFYCuLOGlBuaMIh_ObpmhlgSKkongNfq8tuOAzQWHwQI";
   }
 }
