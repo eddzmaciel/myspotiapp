@@ -37,7 +37,6 @@ export class ArtistComponent {
       this.topTracks = response;
     });
 
-    console.log('this.topTracks: ', this.topTracks);
   }
 
 
