@@ -1,11 +1,8 @@
 <div class="row">
   <div class="col">
-    <input
-      #term
-      type="text"
-      (keyup)="buscar(term.value)"
-      class="form-control"
-      placeholder="Buscar artista..."
-    />
+    <input #name type="text" (keyup)="onSearch(name.value)" class="form-control" placeholder="Buscar artista..." />
+    <button type="button" class="btn bt-dark">Clear</button>
   </div>
 </div>
+<app-loading *ngIf="loading"></app-loading>
+<app-card *ngIf="!loading" [items]="artists"></app-card>

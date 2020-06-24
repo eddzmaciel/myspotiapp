@@ -10,10 +10,16 @@ import { HomeComponent } from "./components/home/home.component";
 import { SearchComponent } from "./components/search/search.component";
 import { ArtistComponent } from "./components/artist/artist.component";
 import { NavbarComponent } from "./components/shared/navbar/navbar.component";
-
-//Importar rutas
-import { ROUTES } from "./app.routes";
 import { CountriesComponent } from "./components/countries/countries.component";
+import { CardComponent } from './components/shared/card/card.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+
+// routes
+import { ROUTES } from "./app.routes";
+
+//pipes 
+import { DomseguroPipe } from "./pipes/domseguro.pipe";
+import { NoimagePipe } from "./pipes/noimage.pipe";
 
 //importing services
 //import { SpotifyService } from "./services/spotify.service";
@@ -25,7 +31,11 @@ import { CountriesComponent } from "./components/countries/countries.component";
     SearchComponent,
     ArtistComponent,
     NavbarComponent,
-    CountriesComponent
+    CountriesComponent,
+    NoimagePipe,
+    DomseguroPipe,
+    CardComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -35,4 +45,4 @@ import { CountriesComponent } from "./components/countries/countries.component";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

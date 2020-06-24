@@ -1,8 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
+//observable example
+import { map } from "rxjs/operators";
+
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class SpotifyService {
   private authorizationToken: string = null;
@@ -12,43 +15,68 @@ export class SpotifyService {
     this.getNewToken();
   }
 
-  getNewReleases() {
+  getQuery(query: string) {
+    const url = `https://api.spotify.com/v1/${query}`;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authorizationToken}`
+      Authorization: `Bearer ${this.authorizationToken}`,
     });
-    return this.http.get(
-      `https://api.spotify.com/v1/browse/new-releases?limit=20`,
-      {
-        headers
-      }
+    return this.http.get(url, { headers });
+  }
+
+  getNewReleases() {
+    //using a pipe and map for transform the data as we need it
+    return this.getQuery("browse/new-releases?limit=20").pipe(
+      map((data) => data["albums"].items)
     );
   }
 
-  getArtist(termino: string) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authorizationToken}`
-    });
-    return this.http.get(
-      `https://api.spotify.com/v1/search?q=${termino}&type=artist&limit=15`,
-      {
-        headers
-      }
+  getArtists(name: string) {
+    //reusing the same query  and giving format to the response data using the pipe
+    return this.getQuery(`search?q=${name}&type=artist&limit=15`).pipe(
+      map((data) => data["artists"].items)
     );
   }
+
+  getArtist(id: string) {
+    return this.getQuery(`artists/${id}`);
+    // .pipe(map((data) => {
+    //   console.log('Artista: ', data);
+    //   data = data;
+    // }));
+  }
+
+
+  getTopTracks(id: string) {
+    return this.getQuery(`artists/${id}/top-tracks?country=us`);
+  }
+
 
   getNewToken() {
-    // const headers = new HttpHeaders({
+    // console.log("getNewToken says: somebody is calling me!");
+
+    // const httpHeaders = new HttpHeaders({
+    //   "Content-Type": "application/x-www-form-urlencoded",
+    //   "Cache-Control": "no-cache",
+    // });
+
+    // const body = {
     //   grant_type: "client_credentials",
     //   client_id: "a9674df9c0154fb8960cb0446e33f46f",
-    //   client_secret: "2b483ec2ac0544fbbf741949e417816f"
-    // });
-    // let generateToken: String;
+    //   client_secret: "2b483ec2ac0544fbbf741949e417816f",
+    // };
+
+    // let generateToken: string;
     // this.http
-    //   .post(`https://accounts.spotify.com/api/token`, { headers })
-    //   .subscribe(data => {
+    //   .post(
+    //     "https://accounts.spotify.com/api/token",
+    //     body,
+    //     { headers: httpHeaders }
+    //   )
+    //   .subscribe((data) => {
     //     console.log(data);
     //   });
+    // this.authorizationToken = generateToken;
     this.authorizationToken =
-      "BQBBjRBP4Yx3XQLdG6auuurlwzskOYntlyZ6RyV9qK1OS43I5KEnBpG_KkMlWu9y5c_GpETqFHJs1jp0YvE";
+      "BQAFi0MRiK82qZYSYBDOE1xNVX7qeCnAkieOrp7IKXWlUpY0OHXrwq5DDfZKR2le2s90lzwdIQfnqNUhFcU";
   }
 }
